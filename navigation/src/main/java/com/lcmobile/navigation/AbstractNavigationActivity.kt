@@ -50,9 +50,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         bottomNavigation.visibility = View.GONE
 
-        navigationStore.restore()?.let {
-            internalInflateNavigation(it)
-        }
+        internalInflateNavigation(navigationStore.restore())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
