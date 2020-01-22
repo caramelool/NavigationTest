@@ -1,17 +1,17 @@
-package com.lcmobile.navigation.analytics
+package com.lcmobile.navigation.tracker
 
 import android.content.Context
 import android.util.Log
 import com.lcmobile.navigation.NavigationAnalytics
 
-internal class NavigationAnalytics(
+internal class NavigationTracker(
     private val context: Context
 ) {
     companion object {
-        private const val TAG = "NavigationAnalytics"
+        private const val TAG = "NavigationTracker"
     }
 
-    fun log(analytics: NavigationAnalytics) {
+    fun track(analytics: NavigationAnalytics) {
         Log.d(TAG, analytics.data)
     }
 }

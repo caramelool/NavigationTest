@@ -12,7 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import com.lcmobile.navigation.analytics.NavigationAnalytics
+import com.lcmobile.navigation.tracker.NavigationTracker
 import com.lcmobile.navigation.event.NavigationEvent
 import com.lcmobile.navigation.inflater.NavigationInflater
 import com.lcmobile.navigation.storage.NavigationStorage
@@ -30,8 +30,8 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
         NavigationStorage(applicationContext)
     }
 
-    private val navigationAnalytics by lazy {
-        NavigationAnalytics(applicationContext)
+    private val navigationTracker by lazy {
+        NavigationTracker(applicationContext)
     }
 
     private val navigationInflater by lazy {
@@ -153,8 +153,8 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        override fun handleAnalytics(analytics: com.lcmobile.navigation.NavigationAnalytics) {
-            navigationAnalytics.log(analytics)
+        override fun handleAnalytics(analytics: NavigationAnalytics) {
+            navigationTracker.track(analytics)
         }
 
         override fun handleFragment(fragment: Fragment) {
