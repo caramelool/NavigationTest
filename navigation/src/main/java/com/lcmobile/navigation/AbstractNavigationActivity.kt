@@ -12,14 +12,18 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.lcmobile.navigation.analytics.NavigationAnalyticsPerformer
+import com.lcmobile.navigation.event.NavigationEventPerformer
+import com.lcmobile.navigation.inflater.NavigationInflater
+import com.lcmobile.navigation.storage.NavigationStorage
 import kotlinx.android.synthetic.main.activity_navigation.*
 
 abstract class AbstractNavigationActivity : AppCompatActivity(),
-    NavigationPerformerListener, NavigationInflaterProvider, NavigationHeaderProvider {
+    NavigationInflaterProvider, NavigationHeaderProvider {
 
     private val eventPerformer by lazy {
         val factory = NavigationFragmentFactoryImpl(classLoader)
-        NavigationEventPerformer(factory, this)
+        NavigationEventPerformer(factory, navigationPerformerListener)
     }
 
     private val navigationStore by lazy {
@@ -76,29 +80,10 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
         }
     }
 
-    override fun onEventPerform() {
-        drawerLayout.closeDrawer(GravityCompat.START)
-    }
-
-    override fun handleAnalytics(analytics: NavigationAnalytics) {
-        analyticsPerformer.log(analytics)
-    }
-
-    override fun handleFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.container,
-                fragment
-            )
-            .commit()
-    }
-
-    override fun handleActivity(intent: Intent) {
-        startActivity(intent)
-    }
-
     fun inflateNavigation(navigation: Navigation) {
-        if (navigationStore.compare(navigation)) {
+        if (navigationStore.compare(navigation)
+            || navigation.type == null
+        ) {
             return
         }
         internalInflateNavigation(navigation)
@@ -159,9 +144,32 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
             .setCheckable(true)
             .setOnMenuItemClickListener {
                 val fragment = NavigationDrawerFragment.newInstance(items)
-                handleFragment(fragment)
+                navigationPerformerListener.handleFragment(fragment)
                 supportActionBar?.hide()
                 false
             }
+    }
+
+    private val navigationPerformerListener = object : NavigationPerformerListener {
+        override fun onEventPerform() {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+
+        override fun handleAnalytics(analytics: NavigationAnalytics) {
+            analyticsPerformer.log(analytics)
+        }
+
+        override fun handleFragment(fragment: Fragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.container,
+                    fragment
+                )
+                .commit()
+        }
+
+        override fun handleActivity(intent: Intent) {
+            startActivity(intent)
+        }
     }
 }

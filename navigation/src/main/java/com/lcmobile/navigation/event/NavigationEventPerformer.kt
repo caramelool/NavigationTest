@@ -1,7 +1,11 @@
-package com.lcmobile.navigation
+package com.lcmobile.navigation.event
 
 import android.content.Intent
 import android.net.Uri
+import com.lcmobile.navigation.NavigationEvent
+import com.lcmobile.navigation.NavigationEventType
+import com.lcmobile.navigation.NavigationFragmentFactory
+import com.lcmobile.navigation.NavigationPerformerListener
 
 class NavigationEventPerformer(
     private val fragmentFactory: NavigationFragmentFactory,

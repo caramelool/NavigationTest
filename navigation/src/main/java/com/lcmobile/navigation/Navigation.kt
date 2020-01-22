@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Navigation(
-    @SerializedName("type") val type: NavigationType,
+    @SerializedName("type") val type: NavigationType?,
     @SerializedName("items") val items: List<NavigationItem>,
     @SerializedName("sub_items") val subItems: List<NavigationItem>
 ) : Parcelable
@@ -47,7 +47,5 @@ data class NavigationEvent(
 
 @Parcelize
 data class NavigationAnalytics(
-    @SerializedName("type") val type: NavigationEventType,
-    @SerializedName("data") val data: String,
-    @SerializedName("extra") val extra: Map<String, String>? = null
+    @SerializedName("data") val data: String
 ) : Parcelable

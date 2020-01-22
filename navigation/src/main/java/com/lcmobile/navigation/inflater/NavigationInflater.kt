@@ -1,9 +1,12 @@
-package com.lcmobile.navigation
+package com.lcmobile.navigation.inflater
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.Menu
 import androidx.core.content.ContextCompat
+import com.lcmobile.navigation.NavigationEvent
+import com.lcmobile.navigation.NavigationItem
+import com.lcmobile.navigation.R
 
 class NavigationInflater(
     private val context: Context
@@ -31,7 +34,9 @@ class NavigationInflater(
         return if (id > 0) {
             ContextCompat.getDrawable(context, id)
         } else {
-            ContextCompat.getDrawable(context, R.drawable.ic_menu_item_default)
+            ContextCompat.getDrawable(context,
+                R.drawable.ic_menu_item_default
+            )
         }
     }
 }

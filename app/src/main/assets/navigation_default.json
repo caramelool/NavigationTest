@@ -1,0 +1,93 @@
+{
+  "type": "drawer",
+  "items": [
+    {
+      "event": {
+        "data": "com.lcmobile.navigationtest.SimpleFragment",
+        "extra": {
+          "description": "Home"
+        },
+        "type": "fragment"
+      },
+      "group": 1,
+      "item_id": 1,
+      "order": 1,
+      "icon": "ic_home_black_24dp",
+      "title": "Home"
+    },
+    {
+      "event": {
+        "data": "com.lcmobile.navigationtest.SimpleFragment",
+        "extra": {
+          "description": "Dashboard"
+        },
+        "type": "fragment"
+      },
+      "group": 1,
+      "item_id": 2,
+      "order": 1,
+      "icon": "ic_dashboard_black_24dp",
+      "title": "Dashboard"
+    },
+    {
+      "event": {
+        "data": "com.lcmobile.navigationtest.SimpleFragment",
+        "extra": {
+          "description": "Notification"
+        },
+        "type": "fragment"
+      },
+      "group": 1,
+      "item_id": 3,
+      "order": 1,
+      "icon": "ic_notifications_black_24dp",
+      "title": "Notification"
+    }
+  ],
+  "sub_items": [
+    {
+      "event": {
+        "data": "http://google.com",
+        "type": "deeplink"
+      },
+      "group": 1,
+      "item_id": 4,
+      "order": 1,
+      "icon": "",
+      "title": "Google"
+    },
+    {
+      "event": {
+        "data": "http://facebook.com",
+        "type": "deeplink"
+      },
+      "group": 1,
+      "item_id": 5,
+      "order": 1,
+      "icon": "ic_insert_link_black_24dp",
+      "title": "Facebook"
+    },
+    {
+      "event": {
+        "data": "http://mercadolivre.com",
+        "type": "deeplink"
+      },
+      "group": 1,
+      "item_id": 6,
+      "order": 1,
+      "icon": "",
+      "title": "Mercado Livre"
+    },
+    {
+      "event": {
+        "data": "http://mercadopago.com",
+        "type": "deeplink"
+      },
+      "group": 1,
+      "item_id": 7,
+      "order": 1,
+      "icon": "ic_insert_link_black_24dp",
+      "title": "Mercado Pago"
+    }
+  ]
+}
