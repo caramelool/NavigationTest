@@ -26,8 +26,9 @@ class SimpleFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_simple, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         description.text = arguments?.getString(EXTRA_DESCRIPTION)
     }
+
 }
