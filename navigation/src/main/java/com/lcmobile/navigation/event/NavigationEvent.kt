@@ -29,6 +29,8 @@ internal class NavigationEvent(
                 }
                 false
             }
+        }.also {
+            event.analytics?.let(listener::handleAnalytics)
         }
     }
 }
