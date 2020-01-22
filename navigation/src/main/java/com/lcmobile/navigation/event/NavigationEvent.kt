@@ -7,7 +7,7 @@ import com.lcmobile.navigation.NavigationEventType
 import com.lcmobile.navigation.NavigationFragmentFactory
 import com.lcmobile.navigation.NavigationPerformerListener
 
-class NavigationEvent(
+internal class NavigationEvent(
     private val fragmentFactory: NavigationFragmentFactory,
     private val listener: NavigationPerformerListener
 ) {

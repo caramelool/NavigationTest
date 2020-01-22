@@ -14,7 +14,7 @@ interface NavigationInflaterProvider {
     fun onInflateNavigationItems(menu: Menu, items: List<NavigationItem>)
 }
 
-interface NavigationPerformerListener {
+internal interface NavigationPerformerListener {
     fun onEventPerform()
     fun handleAnalytics(analytics: NavigationAnalytics)
     fun handleFragment(fragment: Fragment)

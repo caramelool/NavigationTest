@@ -6,13 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.lcmobile.navigation.AbstractNavigationActivity
-import com.lcmobile.navigation.Navigation
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 
 class MainActivity : AbstractNavigationActivity() {

@@ -8,7 +8,7 @@ import com.lcmobile.navigation.NavigationEvent
 import com.lcmobile.navigation.NavigationItem
 import com.lcmobile.navigation.R
 
-class NavigationInflater(
+internal class NavigationInflater(
     private val context: Context
 ) {
 

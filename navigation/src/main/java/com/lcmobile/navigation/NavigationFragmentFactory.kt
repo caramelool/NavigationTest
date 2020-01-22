@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 
-interface NavigationFragmentFactory {
+internal interface NavigationFragmentFactory {
     fun instantiate(className: String, arg: Map<String, String>?): Fragment
 }
 
-class NavigationFragmentFactoryImpl(
+internal class NavigationFragmentFactoryImpl(
     private val classLoader: ClassLoader
 ) : FragmentFactory(), NavigationFragmentFactory {
     override fun instantiate(className: String, arg: Map<String, String>?): Fragment {

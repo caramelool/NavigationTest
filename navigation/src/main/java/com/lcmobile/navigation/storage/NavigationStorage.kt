@@ -7,7 +7,7 @@ import com.google.gson.JsonSyntaxException
 import com.lcmobile.navigation.Navigation
 import java.io.BufferedReader
 
-class NavigationStorage(
+internal class NavigationStorage(
     context: Context
 ) {
     companion object {

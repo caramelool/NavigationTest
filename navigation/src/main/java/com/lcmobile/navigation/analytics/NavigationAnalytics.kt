@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.lcmobile.navigation.NavigationAnalytics
 
-class NavigationAnalytics(
+internal class NavigationAnalytics(
     private val context: Context
 ) {
     companion object {
