@@ -12,8 +12,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import com.lcmobile.navigation.analytics.NavigationAnalyticsPerformer
-import com.lcmobile.navigation.event.NavigationEventPerformer
+import com.lcmobile.navigation.analytics.NavigationAnalytics
+import com.lcmobile.navigation.event.NavigationEvent
 import com.lcmobile.navigation.inflater.NavigationInflater
 import com.lcmobile.navigation.storage.NavigationStorage
 import kotlinx.android.synthetic.main.activity_navigation.*
@@ -21,21 +21,21 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 abstract class AbstractNavigationActivity : AppCompatActivity(),
     NavigationInflaterProvider, NavigationHeaderProvider {
 
-    private val eventPerformer by lazy {
+    private val navigationEvent by lazy {
         val factory = NavigationFragmentFactoryImpl(classLoader)
-        NavigationEventPerformer(factory, navigationPerformerListener)
+        NavigationEvent(factory, navigationPerformerListener)
     }
 
     private val navigationStore by lazy {
-        NavigationStorage(this)
+        NavigationStorage(applicationContext)
     }
 
-    private val analyticsPerformer by lazy {
-        NavigationAnalyticsPerformer()
+    private val navigationAnalytics by lazy {
+        NavigationAnalytics(applicationContext)
     }
 
     private val navigationInflater by lazy {
-        NavigationInflater(this)
+        NavigationInflater(applicationContext)
     }
 
     private val drawerFragment by lazy {
@@ -68,7 +68,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
 
     override fun onInflateNavigationItems(menu: Menu, items: List<NavigationItem>) {
         navigationInflater.inflate(menu, items) {
-            val perform = eventPerformer.perform(it)
+            val perform = navigationEvent.perform(it)
             return@inflate if (menu is BottomNavigationMenu) {
                 if (supportActionBar?.isShowing == false) {
                     supportActionBar?.show()
@@ -102,7 +102,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
                 inflateDrawerNavigation(navigation.subItems)
             }
         }
-        eventPerformer.perform(navigation.items.first().event)
+        navigationEvent.perform(navigation.items.first().event)
     }
 
     private fun inflateDrawerNavigation(
@@ -155,8 +155,8 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        override fun handleAnalytics(analytics: NavigationAnalytics) {
-            analyticsPerformer.log(analytics)
+        override fun handleAnalytics(analytics: com.lcmobile.navigation.NavigationAnalytics) {
+            navigationAnalytics.log(analytics)
         }
 
         override fun handleFragment(fragment: Fragment) {
