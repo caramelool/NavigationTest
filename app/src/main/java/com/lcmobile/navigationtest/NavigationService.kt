@@ -1,5 +1,6 @@
 package com.lcmobile.navigationtest
 
+import android.util.Log
 import com.lcmobile.navigation.Navigation
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +15,7 @@ private var retrofit = Retrofit.Builder()
     .build()
 
 private interface NavigationService {
-    @GET("detail")
+    @GET("navigation")
     fun getNavigation(): Call<Navigation>
 }
 
@@ -28,7 +29,7 @@ fun getNavigation(block: (Navigation) -> Unit) {
         }
 
         override fun onFailure(call: Call<Navigation>, t: Throwable) {
-            //Do nothing
+            Log.w("NavigationService", t)
         }
     })
 }

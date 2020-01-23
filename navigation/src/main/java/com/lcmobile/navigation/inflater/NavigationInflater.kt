@@ -34,7 +34,8 @@ internal class NavigationInflater(
         return if (id > 0) {
             ContextCompat.getDrawable(context, id)
         } else {
-            ContextCompat.getDrawable(context,
+            ContextCompat.getDrawable(
+                context,
                 R.drawable.ic_menu_item_default
             )
         }

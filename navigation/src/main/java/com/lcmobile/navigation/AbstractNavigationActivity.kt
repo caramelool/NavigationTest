@@ -13,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.lcmobile.navigation.tracker.NavigationTracker
-import com.lcmobile.navigation.event.NavigationEvent
+import com.lcmobile.navigation.event.NavigationEventPerformer
 import com.lcmobile.navigation.inflater.NavigationInflater
 import com.lcmobile.navigation.storage.NavigationStorage
 import kotlinx.android.synthetic.main.activity_navigation.*
@@ -21,9 +21,9 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 abstract class AbstractNavigationActivity : AppCompatActivity(),
     NavigationInflaterProvider, NavigationHeaderProvider {
 
-    private val navigationEvent by lazy {
+    private val navigationEventPerformer by lazy {
         val factory = NavigationFragmentFactoryImpl(classLoader)
-        NavigationEvent(factory, navigationPerformerListener)
+        NavigationEventPerformer(factory, navigationPerformerListener)
     }
 
     private val navigationStore by lazy {
@@ -66,7 +66,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
 
     override fun onInflateNavigationItems(menu: Menu, items: List<NavigationItem>) {
         navigationInflater.inflate(menu, items) {
-            val perform = navigationEvent.perform(it)
+            val perform = navigationEventPerformer.perform(it)
             return@inflate if (menu is BottomNavigationMenu) {
                 if (supportActionBar?.isShowing == false) {
                     supportActionBar?.show()
@@ -100,7 +100,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
                 inflateDrawerNavigation(navigation.subItems)
             }
         }
-        navigationEvent.perform(navigation.items.first().event)
+        navigationEventPerformer.perform(navigation.items.first().event)
     }
 
     private fun inflateDrawerNavigation(
@@ -137,7 +137,7 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
     }
 
     private fun inflateMenuInBottomNavigation(items: List<NavigationItem>) {
-        bottomNavigation.menu.add(1, -99, 1, "Menu")
+        bottomNavigation.menu.add(1, 99, 99, "Menu")
             .setIcon(R.drawable.ic_menu_black)
             .setCheckable(true)
             .setOnMenuItemClickListener {
