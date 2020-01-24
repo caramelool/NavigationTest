@@ -68,4 +68,10 @@ class NavigationDrawerFragment : Fragment() {
         }
     }
 
+    var selectedItemId: Int?
+        set(value) {
+            value?.let { navigationView.setCheckedItem(value) }
+        }
+        get() = navigationView.checkedItem?.itemId
+
 }

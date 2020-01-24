@@ -92,15 +92,23 @@ abstract class AbstractNavigationActivity : AppCompatActivity(),
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         bottomNavigation.visibility = View.GONE
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        val firstItem = navigation.items.first()
         when (navigation.type) {
-            NavigationType.Drawer -> inflateDrawerNavigation(navigation.items, navigation.subItems)
-            NavigationType.Bottom -> inflateBottomNavigation(navigation.items, navigation.subItems)
+            NavigationType.Drawer -> {
+                inflateDrawerNavigation(navigation.items, navigation.subItems)
+                drawerFragment.selectedItemId = firstItem.itemId
+                navigationEventPerformer.perform(firstItem.event)
+            }
+            NavigationType.Bottom -> {
+                inflateBottomNavigation(navigation.items, navigation.subItems)
+                bottomNavigation.selectedItemId = firstItem.itemId
+            }
             NavigationType.Both -> {
                 inflateBottomNavigation(navigation.items)
                 inflateDrawerNavigation(navigation.subItems)
+                bottomNavigation.selectedItemId = firstItem.itemId
             }
         }
-        navigationEventPerformer.perform(navigation.items.first().event)
     }
 
     private fun inflateDrawerNavigation(
